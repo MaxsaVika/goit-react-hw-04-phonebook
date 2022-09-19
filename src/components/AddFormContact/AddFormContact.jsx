@@ -43,6 +43,9 @@ export default class FormAddContact extends Component {
               id = {nameId}
               className={css.form_input} 
               type = "text" 
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Charles de Batz de Castelmore d'Artagnan"
+              required
               placeholder="Name" 
               value={this.state.name}
               name ="name"
@@ -58,10 +61,13 @@ export default class FormAddContact extends Component {
             <input
               id={numberId} 
               className={css.form_input} 
-              type = "text" 
+              type="tel"
+                name="number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                required
               placeholder="Number" 
               value={this.state.number}
-              name ="number"
               onChange={handleChange}>
             </input>
 

@@ -1,8 +1,9 @@
-import { Component } from "react";
+import { Component, forwardRef } from "react";
 import Section from "./Section/Section";
 import FormAddContact from "./AddFormContact/AddFormContact";
-import ContactList from "./ContactList/ContactList";
+import ContactList from "./ContactList/ContactList"
 import { nanoid } from "nanoid";
+import { FilterContact } from "./FilterContact/FilterContact";
 
 
 export default class App extends Component {
@@ -17,6 +18,10 @@ export default class App extends Component {
   }
 
   addContact = (contact)=>{
+    if (this.onCheckupContact(contact)){
+      return alert(`${contact.name} is already in contacts `)
+    }
+
     this.setState((prev)=>{
       const newContact = {
         id: nanoid(),
@@ -28,9 +33,47 @@ export default class App extends Component {
     })
   }
 
+  onCheckupContact ({name}) {
+    const {contacts} = this.state
+    const res = contacts.find(contact => contact.name === name)
+    return res
+  }
+
+  removeContact = (id)=>{
+    this.setState((prev)=>{
+      const newContacts = prev.contacts.filter(contact => contact.id !== id)
+      return {
+        contacts: newContacts
+      }
+    })
+  }
+
+  handleChange = (e)=>{
+    const {name, value} = e.target
+    this.setState({
+      [name]: value,
+    })
+
+  }
+
+  getFilteredContact(){
+    const {contacts, filter} = this.state
+    if (!filter) {
+      return contacts
+    }
+
+    const filterContacts = contacts.filter(({name}) =>{
+      const result = name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+      return result
+    })
+
+    return filterContacts
+  }
+
   render(){
-    const{contacts} = this.state
-    const{addContact} = this;
+    const {filter} = this.state;
+    const {addContact, removeContact, handleChange} = this;
+    const contacts = this.getFilteredContact()
 
     return (
       <>
@@ -38,8 +81,9 @@ export default class App extends Component {
           <FormAddContact onSubmit = {addContact}/>
         </Section>
 
-        <Section title = "Contact List">
-          <ContactList items = {contacts}/>
+        <Section title = "Contacts">
+          <FilterContact filter = {filter} onChange = {handleChange}/>
+          <ContactList items = {contacts} onRemoveContact = {removeContact}/>
         </Section>
       </>
     )

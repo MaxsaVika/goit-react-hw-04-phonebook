@@ -1,0 +1,13 @@
+.find_label{
+    align-items: center;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.find_input{
+    width: 90%;
+    height: 28px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
