@@ -1,4 +1,4 @@
-import { Component, forwardRef } from "react";
+import { Component } from "react";
 import Section from "./Section/Section";
 import FormAddContact from "./AddFormContact/AddFormContact";
 import ContactList from "./ContactList/ContactList"
