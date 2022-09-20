@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import css from './FilterContact.module.css'
 
 export const FilterContact = ({filter, onChange})=> {
@@ -18,3 +19,8 @@ export const FilterContact = ({filter, onChange})=> {
         </div>
     )
 }
+
+FilterContact.propTypes = {
+    filter: PropTypes.string,
+    onChange: PropTypes.func,
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import css from "./ContactList.module.css";
 
 export default function ContactList ({items, onRemoveContact}) {
@@ -25,3 +26,14 @@ const contacts = items.map(({name, number, id})=>{
         </table>
     )
 }
+
+ContactList.propTypes = {
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            number: PropTypes.string,
+        })
+    ),
+    onRemoveContact: PropTypes.func,
+};

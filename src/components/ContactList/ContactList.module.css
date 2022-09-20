@@ -48,7 +48,7 @@ tr {
 .contact_span{
     position: absolute;
     right: 6px;
-    color: rgb(233, 90, 90);
+    /* color: rgb(233, 90, 90); */
     font-weight: 600;
     text-transform: lowercase;
 }
